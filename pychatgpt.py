@@ -28,6 +28,8 @@ request_data = {
 response = requests.post(api_endpoint, headers = request_headers, json=request_data)
 
 if response.status_code == 200:
-    print(response.json()["choices"][0]["text"])
+    response_text = response.json()["choices"][0]["text"]
+    with open(args.file_name, "w") as file:
+        file.write(response_text)
 else:
     print(f"Request Failed with status code: {str(response.status_code)}")
